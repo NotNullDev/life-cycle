@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1691545461987,
+      "tag": "0000_lumpy_malice",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1691551420364,
+      "tag": "0001_unique_alex_wilder",
+      "breakpoints": true
+    }
+  ]
+}
