@@ -61,7 +61,9 @@ export default function App() {
                   <Button variant="ghost" name="_action" value="logout">Logout</Button>
                 </Form>
             )}
-            {!data.userLoggedIn && <Link to={"/login"}>Login</Link>}
+            {!data.userLoggedIn && <Link to={"/login"}>
+              <Button variant="ghost">Login</Button>
+            </Link>}
           </div>
         </header>
         <Outlet />

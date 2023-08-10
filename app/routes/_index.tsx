@@ -44,20 +44,10 @@ export async function action({request, params, context}: ActionArgs) {
 
 export default function Index() {
     const users = useLoaderData<typeof loader>()
-    const navigation = useNavigation();
-    const isBusy = navigation.state !== "idle";
 
     return (
         <div className="flex flex-col container mx-auto p-16 gap-2">
             <div>found {users.length} users</div>
-            <Form className="flex flex-col gap-2" method="POST">
-                <Input type="text" name="name" placeholder="Name"/>
-                <Input type="email" name="email" placeholder="Email"/>
-                <Button type="submit">Create user</Button>
-            </Form>
-            {
-                isBusy && <div>busy...</div>
-            }
         </div>
     );
 }
