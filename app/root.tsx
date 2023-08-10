@@ -7,12 +7,16 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration, useLoaderData,
+  ScrollRestoration, useLoaderData, useNavigation,
 } from "@remix-run/react";
 import tailwind from "./tailwind.css";
 import {destroySession, getSession} from "~/sessions";
 import {Button} from "~/lib/components/ui/button";
 import {redirect} from "@remix-run/node";
+import {TypographyMuted} from "~/lib/components/ui/typography/muted";
+import { TypographyH2 } from "./lib/components/ui/typography/h2";
+import {Separator} from "~/lib/components/ui/separator";
+import {cn} from "~/lib/utils";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwind },
@@ -43,6 +47,9 @@ export async function action({request}: ActionArgs) {
 
 export default function App() {
   const data = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
+
+  console.log(navigation.location)
 
   return (
     <html lang="en" className="dark" style={{background: "black"}}>
@@ -52,7 +59,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-screen">
+      <body className="h-screen flex flex-col">
         <header className="p-4 flex justify-between container mx-auto">
           <Link to={"/"}>Life cycle</Link>
           <div>
@@ -66,7 +73,42 @@ export default function App() {
             </Link>}
           </div>
         </header>
-        <Outlet />
+        <div className="p-4">
+          <div>
+            <TypographyH2>Settings page</TypographyH2>
+            <TypographyMuted>Settings description</TypographyMuted>
+            <Separator  className='my-4' />
+          </div>
+          <div className="flex flex-1">
+            <div>
+              <nav className="w-[200px]">
+                <ul className="flex flex-col gap-2">
+                  <li className={cn(
+                    'p-1 bg-muted rounded-md',
+                    'hover:cursor-pointer',
+                    {
+                      'hover:underline': navigation.location?.pathname !== "/",
+                      'bg-muted': navigation.location?.pathname === "/"
+                    }
+                  )}>
+                    <Link  to={"/"}>Home</Link>
+                  </li>
+                  <li className={cn(
+                    'p-1 bg-muted rounded-md',
+                    'hover:cursor-pointer',
+                    {
+                      'hover:underline': navigation.location?.pathname !== "/settings",
+                      'bg-muted': navigation.location?.pathname === "/settings"
+                    }
+                  )}>
+                    <Link to={"/settings"}>Settings</Link>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <Outlet />
+          </div>
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

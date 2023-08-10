@@ -5,5 +5,19 @@ export const AppConfig = {
   session: {
     secrets: ["supersecretsecret"],
     sessionFileLocation: "/app/sessions",
+  },
+  pages: {
+    home: {
+      title: "Home",
+      description: "Home page",
+    },
+    login: {
+      title: "Login",
+      description: "Login page",
+    },
+    settings: {
+      title: "Settings",
+      description: "Settings page",
+    }
   }
 }
